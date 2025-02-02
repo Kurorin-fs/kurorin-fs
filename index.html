@@ -10,9 +10,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            justify-content: flex-start;
+            min-height: 100vh;
             text-align: center;
+            margin: 0;
             transition: background-color 0.3s, color 0.3s;
         }
         .dark-theme {
@@ -23,7 +24,18 @@
             background-color: #ffffff;
             color: #000000;
         }
+        .container {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            max-width: 900px;
+            width: 100%;
+            padding: 20px;
+            margin-top: 20px;
+            justify-content: center; /* 中央に配置 */
+        }
         .profile {
+            flex: 1;
             max-width: 400px;
             padding: 20px;
             border-radius: 10px;
@@ -79,20 +91,69 @@
         .theme-toggle:hover {
             background-color: #0088cc;
         }
+        .tweets, .rss-gallery {
+            flex: 1;
+            max-width: 400px;
+            min-height: 500px;
+            overflow-y: auto;
+        }
+        .gallery-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .gallery-grid img {
+            width: 120px;
+            height: 120px;
+            border-radius: 5px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.1);
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .tweets, .rss-gallery {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body class="dark-theme">
     <button class="theme-toggle">Light/Dark</button>
-    <div class="profile">
-        <img src="https://cdn.flightsim.to/images/avatars/WP5SJgHR.jpg" alt="Kurorin" class="avatar">
-        <h1>Kurorin</h1>
-        <p>Addon Developer (Microsoft Flight Simulator)</p>
-        <div class="links">
-            <a href="https://flightsim.to/profile/Kurorin" target="_blank">Flightsim.to</a>
-            <a href="https://x.com/kurorin_fs" target="_blank">X (Twitter)</a>
+    <div class="container">
+        <!-- プロフィールセクション -->
+        <div class="profile">
+            <img src="https://cdn.flightsim.to/images/avatars/WP5SJgHR.jpg" alt="Kurorin" class="avatar">
+            <h1>Kurorin</h1>
+            <p>Addon Developer (Microsoft Flight Simulator)</p>
+            <div class="links">
+                <a href="https://flightsim.to/profile/Kurorin" target="_blank">Flightsim.to</a>
+                <a href="https://x.com/kurorin_fs" target="_blank">X (Twitter)</a>
+            </div>
+        </div>
+
+        <!-- RSS ギャラリーセクション -->
+        <div class="rss-gallery">
+            <h2>Latest Addons</h2>
+            <div id="gallery-grid" class="gallery-grid"></div>
         </div>
     </div>
+
+    <!-- ツイートセクション -->
+    <div class="tweets">
+        <a class="twitter-timeline" data-theme="dark" href="https://x.com/kurorin_fs">Tweets by Kurorin</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+
     <script>
+        // タイムラインを切り替えるスクリプト
         const toggleButton = document.querySelector('.theme-toggle');
         const body = document.body;
 
@@ -109,9 +170,31 @@
             }
         });
 
-        //Default Theme
+        // Default Theme
         const savedTheme = localStorage.getItem('theme') || 'dark-theme';
         setTheme(savedTheme);
+
+        // RSSギャラリーを読み込む関数
+        async function loadGallery() {
+            const url = "https://api.rss2json.com/v1/api.json?rss_url=https://flightsim.to/rss/profile/Kurorin";
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const galleryGrid = document.getElementById("gallery-grid");
+
+                // RSSから画像URLを取得（最新5件）
+                data.items.slice(0, 5).forEach(item => {
+                    const img = document.createElement("img");
+                    img.src = item.enclosure.link;
+                    img.alt = item.title;
+                    img.onclick = () => window.open(item.link, "_blank"); // クリックでページへ
+                    galleryGrid.appendChild(img);
+                });
+            } catch (error) {
+                console.error("Failed to load gallery:", error);
+            }
+        }
+        loadGallery();
     </script>
 </body>
 </html>
