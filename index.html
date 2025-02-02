@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,16 +19,36 @@
 
     /* ダークモードの背景 */
     .dark-theme {
-      background: linear-gradient(120deg, #004e92, #0066cc); /* 暗めの青から緑へのグラデーション */
-      color: #fff; /* 文字色を白に */
+      background: linear-gradient(120deg, #004e92, #0066cc);
+      color: #fff;
     }
 
     /* ライトモードの背景 */
     .light-theme {
-      background: linear-gradient(120deg, #87cefa, #00bfae); /* 明るい青から緑へのグラデーション */
-      color: #000; /* 文字色を黒に */
+      background: linear-gradient(120deg, #87cefa, #00bfae);
+      color: #000;
     }
 
+    /* Light/Dark ボタン：画面右上に絶対配置 */
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #00aaff;
+      color: #ffffff;
+      transition: 0.3s;
+      z-index: 100;
+    }
+    .theme-toggle:hover {
+      background-color: #0088cc;
+    }
+
+    /* コンテナはボタンより下に表示（上マージンを調整） */
     .container {
       display: flex;
       gap: 20px;
@@ -36,16 +56,15 @@
       max-width: 900px;
       width: 100%;
       padding: 20px;
-      margin-top: 20px;
+      margin-top: 60px;
       justify-content: space-between;
     }
     .left-column, .right-column {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      width: 48%; /* 左右それぞれの幅を指定 */
+      width: 48%;
     }
-    /* アニメーションの初期状態は opacity のみで非表示にする */
     .profile, .github-stats, .about-me, .skills {
       max-width: 400px;
       padding: 20px;
@@ -56,7 +75,10 @@
       animation: fadeIn 1s ease-out forwards;
       opacity: 0;
     }
-    .light-theme .profile, .light-theme .github-stats, .light-theme .about-me, .light-theme .skills {
+    .light-theme .profile, 
+    .light-theme .github-stats, 
+    .light-theme .about-me, 
+    .light-theme .skills {
       background-color: #f0f0f0;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
@@ -79,46 +101,18 @@
       text-decoration: none;
       font-size: 18px;
       font-weight: bold;
-      transition: transform 0.3s ease; /* リンクのホバー時に拡大 */
+      transition: transform 0.3s ease;
     }
     .light-theme .links a {
       color: #ffffff;
       background-color: #0077cc;
     }
     .links a:hover {
-      transform: scale(1.1); /* リンクを拡大 */
-      background-color: #0088cc;
-    }
-    .theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      background-color: #00aaff;
-      color: #ffffff;
-      transition: 0.3s;
-    }
-    .theme-toggle:hover {
+      transform: scale(1.1);
       background-color: #0088cc;
     }
     .about-me, .skills {
-      max-width: 400px;
-      padding: 20px;
-      background-color: #1e1e1e;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      transition: background-color 0.3s;
       text-align: left;
-      animation: fadeIn 1s ease-out forwards;
-      opacity: 0;
-    }
-    .light-theme .about-me, .light-theme .skills {
-      background-color: #f0f0f0;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .about-me h2, .skills h2 {
       font-size: 24px;
@@ -143,7 +137,7 @@
       margin-top: 20px;
     }
     .github-stats img {
-      max-width: 100%; /* statsカードがはみ出さないようにする */
+      max-width: 100%;
     }
     @media (max-width: 768px) {
       .container {
@@ -151,7 +145,7 @@
         align-items: center;
       }
       .left-column, .right-column {
-        width: 100%; /* モバイル向けに全幅表示 */
+        width: 100%;
       }
     }
 
@@ -163,7 +157,6 @@
         visibility: hidden;
       }
       1% {
-        /* すぐに表示状態に */
         visibility: visible;
       }
       100% {
@@ -174,7 +167,9 @@
   </style>
 </head>
 <body class="dark-theme">
+  <!-- 画面右上に配置される Light/Dark ボタン -->
   <button class="theme-toggle">Light/Dark</button>
+  
   <div class="container">
     <!-- 左側のカラム -->
     <div class="left-column">
@@ -183,7 +178,7 @@
         <img src="https://cdn.flightsim.to/images/avatars/WP5SJgHR.jpg" alt="Kurorin" class="avatar">
         <h1>Kurorin</h1>
         <p>Addon Developer (Microsoft Flight Simulator)</p>
-        <p>[Z+9] Tokyo   /   a.k.a Kuro</p>
+        <p>[Z+9] Tokyo / a.k.a Kuro</p>
         <div class="links">
           <a href="https://flightsim.to/profile/Kurorin" target="_blank">Flightsim.to</a>
           <a href="https://x.com/kurorin_fs" target="_blank">X (Twitter)</a>
@@ -199,14 +194,14 @@
 
     <!-- 右側のカラム -->
     <div class="right-column">
-      <!-- About Meセクション -->
+      <!-- About Me セクション -->
       <div class="about-me">
         <h2>About Me</h2>
         <p>I'm an addon developer for Microsoft Flight Simulator, specializing in creating high-quality aircrafts, liveries and sceneries.</p>
         <p>I'm primarily skilled in Blender and the MSFS SDK.</p>
       </div>
 
-      <!-- Skillsセクション -->
+      <!-- Skills セクション -->
       <div class="skills">
         <h2>Skills</h2>
         <ul>
@@ -230,8 +225,6 @@
     function setTheme(theme) {
       body.className = theme;
       localStorage.setItem('theme', theme);
-
-      // GitHub Statsカードのテーマを同期
       const themeParam = theme === 'dark-theme' ? 'github_dark' : 'github_light';
       githubStatsImg.src = `https://github-readme-stats-clone-lopn.vercel.app/api?username=Kurorin-fs&include_all_commits=true&theme=${themeParam}`;
     }
@@ -244,7 +237,6 @@
       }
     });
 
-    // 保存されているテーマまたはデフォルトのテーマを適用
     const savedTheme = localStorage.getItem('theme') || 'dark-theme';
     setTheme(savedTheme);
   </script>
