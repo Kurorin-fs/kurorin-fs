@@ -16,14 +16,19 @@
             margin: 0;
             transition: background-color 0.3s, color 0.3s;
         }
+
+        /* ダークモードの背景 */
         .dark-theme {
-            background-color: #121212;
-            color: #ffffff;
+            background: linear-gradient(120deg, #004e92, #0066cc); /* 暗めの青から緑へのグラデーション */
+            color: #fff; /* 文字色を白に */
         }
+
+        /* ライトモードの背景 */
         .light-theme {
-            background-color: #ffffff;
-            color: #000000;
+            background: linear-gradient(120deg, #87cefa, #00bfae); /* 明るい青から緑へのグラデーション */
+            color: #000; /* 文字色を黒に */
         }
+
         .container {
             display: flex;
             gap: 20px;
@@ -175,7 +180,7 @@
             <div class="about-me">
                 <h2>About Me</h2>
                 <p>I'm an addon developer for Microsoft Flight Simulator, specializing in creating high-quality aircrafts, liveries and sceneries.</p>
-		<p>I'm primarily skilled in Blender and the MSFS SDK.</p>
+                <p>I'm primarily skilled in Blender and the MSFS SDK.</p>
             </div>
 
             <!-- Skillsセクション -->
