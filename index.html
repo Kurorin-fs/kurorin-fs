@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kurorin - Profile</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -165,7 +164,7 @@
             <!-- GitHub Stats Card -->
             <div class="github-stats">
                 <h2>GitHub Stats</h2>
-                <img src="https://github-readme-stats.vercel.app/api?username=Kurorin-fs&theme=github_dark" alt="GitHub Stats Card">
+                <img id="github-stats" src="https://github-readme-stats.vercel.app/api?username=Kurorin-fs&theme=github_dark" alt="GitHub Stats Card">
             </div>
         </div>
 
@@ -181,12 +180,12 @@
             <div class="skills">
                 <h2>Skills</h2>
                 <ul>
-                    <li><i class="simple-icons-blender" title="Blender"></i></li>
-                    <li><i class="simple-icons-3dsmax" title="3dsMax"></i></li>
-                    <li><i class="simple-icons-gimp" title="GIMP"></i></li>
-                    <li><i class="simple-icons-python" title="Python"></i></li>
-                    <li><i class="simple-icons-typescript" title="Typescript"></i></li>
-                    <li><i class="simple-icons-node-dot-js" title="Node.js"></i></li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Blender_logo_2019.svg" alt="Blender" width="40" height="40"></li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/3ds_Max_logo.svg" alt="3dsMax" width="40" height="40"></li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/6/65/GIMP_2.10_icon.svg" alt="GIMP" width="40" height="40"></li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" width="40" height="40"></li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Typescript_logo_2020.svg" alt="Typescript" width="40" height="40"></li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" width="40" height="40"></li>
                 </ul>
             </div>
         </div>
@@ -196,10 +195,15 @@
         // タイムラインを切り替えるスクリプト
         const toggleButton = document.querySelector('.theme-toggle');
         const body = document.body;
+        const githubStatsImg = document.getElementById('github-stats');
 
         function setTheme(theme) {
             body.className = theme;
             localStorage.setItem('theme', theme);
+
+            // GitHub Statsテーマの同期
+            const themeParam = theme === 'dark-theme' ? 'github_dark' : 'github_light';
+            githubStatsImg.src = `https://github-readme-stats.vercel.app/api?username=Kurorin-fs&theme=${themeParam}`;
         }
 
         toggleButton.addEventListener('click', () => {
