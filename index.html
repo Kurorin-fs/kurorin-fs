@@ -33,18 +33,23 @@
             width: 100%;
             padding: 20px;
             margin-top: 20px;
-            justify-content: space-between; /* 横並びにして、スペースを均等に */
+            justify-content: space-between;
         }
-        .profile {
-            flex: 1;
+        .left-column, .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 48%; /* 左右それぞれの幅を指定 */
+        }
+        .profile, .github-stats, .about-me, .skills {
             max-width: 400px;
             padding: 20px;
-            border-radius: 10px;
             background-color: #1e1e1e;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
             transition: background-color 0.3s;
         }
-        .light-theme .profile {
+        .light-theme .profile, .light-theme .github-stats, .light-theme .about-me, .light-theme .skills {
             background-color: #f0f0f0;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -123,13 +128,20 @@
             font-size: 24px;
             margin: 5px 0;
         }
+        .github-stats {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .github-stats img {
+            max-width: 100%; /* statsカードがはみ出さないようにする */
+        }
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
                 align-items: center;
             }
-            .about-me, .profile, .skills {
-                width: 100%;
+            .left-column, .right-column {
+                width: 100%; /* モバイル向けに全幅表示 */
             }
         }
     </style>
@@ -137,36 +149,47 @@
 <body class="dark-theme">
     <button class="theme-toggle">Light/Dark</button>
     <div class="container">
-        <!-- プロフィールセクション -->
-        <div class="profile">
-            <img src="https://cdn.flightsim.to/images/avatars/WP5SJgHR.jpg" alt="Kurorin" class="avatar">
-            <h1>Kurorin</h1>
-            <p>Addon Developer (Microsoft Flight Simulator)</p>
-            <div class="links">
-                <a href="https://flightsim.to/profile/Kurorin" target="_blank">Flightsim.to</a>
-                <a href="https://x.com/kurorin_fs" target="_blank">X (Twitter)</a>
+        <!-- 左側のカラム -->
+        <div class="left-column">
+            <!-- プロフィールセクション -->
+            <div class="profile">
+                <img src="https://cdn.flightsim.to/images/avatars/WP5SJgHR.jpg" alt="Kurorin" class="avatar">
+                <h1>Kurorin</h1>
+                <p>Addon Developer (Microsoft Flight Simulator)</p>
+                <div class="links">
+                    <a href="https://flightsim.to/profile/Kurorin" target="_blank">Flightsim.to</a>
+                    <a href="https://x.com/kurorin_fs" target="_blank">X (Twitter)</a>
+                </div>
+            </div>
+
+            <!-- GitHub Stats Card -->
+            <div class="github-stats">
+                <h2>GitHub Stats</h2>
+                <img src="https://github-readme-stats.vercel.app/api?username=Kurorin-fs&theme=github_dark" alt="GitHub Stats Card">
             </div>
         </div>
 
-        <!-- About Meセクション -->
-        <div class="about-me">
-            <h2>About Me</h2>
-            <p>I'm an addon developer for Microsoft Flight Simulator, with a focus on creating high-quality aircraft and liveries. I specialize in optimizing models for performance and realism, using tools like Blender and the MSFS SDK.</p>
-            <p>When I'm not developing, I enjoy exploring aviation and flight simulation, and collaborating with other developers in the community.</p>
-        </div>
-    </div>
+        <!-- 右側のカラム -->
+        <div class="right-column">
+            <!-- About Meセクション -->
+            <div class="about-me">
+                <h2>About Me</h2>
+                <p>I'm an addon developer for Microsoft Flight Simulator, with a focus on creating high-quality aircraft and liveries. I specialize in optimizing models for performance and realism, using tools like Blender and the MSFS SDK.</p>
+            </div>
 
-    <!-- Skillsセクション -->
-    <div class="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li><i class="simple-icons-blender" title="Blender"></i></li>
-            <li><i class="simple-icons-3dsmax" title="3dsMax"></i></li>
-            <li><i class="simple-icons-gimp" title="GIMP"></i></li>
-            <li><i class="simple-icons-python" title="Python"></i></li>
-            <li><i class="simple-icons-typescript" title="Typescript"></i></li>
-            <li><i class="simple-icons-node-dot-js" title="Node.js"></i></li>
-        </ul>
+            <!-- Skillsセクション -->
+            <div class="skills">
+                <h2>Skills</h2>
+                <ul>
+                    <li><i class="simple-icons-blender" title="Blender"></i></li>
+                    <li><i class="simple-icons-3dsmax" title="3dsMax"></i></li>
+                    <li><i class="simple-icons-gimp" title="GIMP"></i></li>
+                    <li><i class="simple-icons-python" title="Python"></i></li>
+                    <li><i class="simple-icons-typescript" title="Typescript"></i></li>
+                    <li><i class="simple-icons-node-dot-js" title="Node.js"></i></li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
